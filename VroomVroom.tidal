@@ -1,0 +1,25 @@
+do
+  let t = "cxvv"
+  let build = loopAt 2 $ n "0" # s "cutcxvv"
+      drive = loopAt 1 $ n "1" # s "cutcxvv"   
+  bpm 180
+  let mx = [0,0,0,0]
+  p (t++"vx")
+    -- . fa 2
+    $ drive # glo' (mx!!0) 1 0 # shape 0.4
+    -- # ac (-1)
+  p (t++"syn") . jux (# ac 0.03)
+    $ build # glo' (mx!!1) 1 1
+  p (t++"pc") . fa 1
+    $ stack [
+       -- struct "[t ~] [~ t _ [t? ~]]" $ n 2 # s "bddnb",
+       -- jux (# ac 0.2) . struct "[~ t]*4" $ n 20 # s "ch2hh" # shape 0.5,
+       -- fa "<1 [1 [1 4]]>" . struct "[~ t]*2" $ n 13 # s "pcmsn",
+       -- struct "t*4" $ n 13 # s "pcmcp"
+      ] # glo' (mx!!2) 1 2
+  p (t++"bs")
+    -- . struct "[t ~] [~ t _ [t? ~]]"
+    . struct "t*4"
+    $ n (sl 4 $ "[0 2]" + 2)
+    -- $ n (sl 16 $ "[0 2]!2 [0 1 4 [3 2 1]] [2 2 2 [3 2 1]*2]" + 2)
+    # s "cutcxvv" # glo' (mx!!3) 1 3 # rvb "0.3:0.3"
